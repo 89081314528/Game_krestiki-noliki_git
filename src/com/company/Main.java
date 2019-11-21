@@ -10,13 +10,6 @@ import java.util.Scanner;
  * если такой ячейки нет, вернуть минус 1
  * если нельзя поставить символ в ячейку, вернуть минус 2
  * 3) предлагать игроку сделать ход 10 раз
- *
- * 1) сделать класс персон, с полями возраст и пол. у класса должен быть метод isAdult который возвращает взрослый человек или нет
- * девочки взрослые с 15, а мальчики с 35
- * поменять возраст используя метод set
- * лист с переменными класса персон
- * 2) сделать три класса - квадрат, прямоуголтник, треуголиник и круг. у каждого из них два метода - area, perimetеr
- *
  */
 
 public class Main {
@@ -30,36 +23,30 @@ public class Main {
         for (int i = 0; i < 9; i++) {
             System.out.println("Ход игрока Х, введите номер ячейки, в которой хотите поставить Х");
             Scanner inputNumberOfCell = new Scanner(System.in);
+            int countWrongInput = 0;
             int numberOfCell = inputNumberOfCell.nextInt();
             for (int g = 0; g < 3 ; g++) {
                 if (numberOfCell > 9 || numberOfCell < 1) {
                     System.out.println("Можно вносить только числа от 1 до 9");
-                    numberOfCell = inputNumberOfCell.nextInt();
-                    if (numberOfCell > 9 || numberOfCell < 1) {
-                        System.out.println("Можно вносить только числа от 1 до 9");
-                        numberOfCell = inputNumberOfCell.nextInt();
-                        if (numberOfCell > 9 || numberOfCell < 1) {
-                            System.out.println("Прочитайте правила игры и возвращайтесь снова. Победил игрок 0");
-                            return;
-                        }
+                    countWrongInput = countWrongInput + 1;
+                    System.out.println("Неверных попыток ввода данных " + countWrongInput);
+                    if (countWrongInput == 3) {
+                        System.out.println("Вы превысили лимит попыток ввода, победил игрок 0");
+                        return;
                     }
-                }
-                break;
-            }
-            for (int j = 0; j < 3 ; j++) {
+                    numberOfCell = inputNumberOfCell.nextInt();
+                } else
                 if (field.get(numberOfCell - 1).equals("0 ") || field.get(numberOfCell - 1).equals("x ")) {
                     System.out.println("Эта ячейка уже занята, выберите другую ячейку");
-                    numberOfCell = inputNumberOfCell.nextInt();
-                    if (field.get(numberOfCell - 1).equals("0 ") || field.get(numberOfCell - 1).equals("x ")) {
-                        System.out.println("Эта ячейка уже занята, выберите другую ячейку");
-                        numberOfCell = inputNumberOfCell.nextInt();
-                        if (field.get(numberOfCell - 1).equals("0 ") || field.get(numberOfCell - 1).equals("x ")) {
-                            System.out.println("Прочитайте правила игры и возвращайтесь снова. Победил игрок 0");
-                            return;
-                        }
+                    countWrongInput = countWrongInput + 1;
+                    System.out.println("Неверных попыток ввода данных " + countWrongInput);
+                    if (countWrongInput == 3) {
+                        System.out.println("Вы превысили лимит попыток ввода, победил игрок 0");
+                        return;
                     }
-                }
-                break;
+                    numberOfCell = inputNumberOfCell.nextInt();
+                } else
+                    break;
             }
             field.set((numberOfCell - 1),"x ");
             printField(field);
@@ -76,37 +63,31 @@ public class Main {
             }
             System.out.println("Ход игрока 0, введите номер ячейки, в которой хотите поставить 0");
             numberOfCell = inputNumberOfCell.nextInt();
+            countWrongInput = 0;
             for (int g = 0; g < 3 ; g++) {
                 if (numberOfCell > 9 || numberOfCell < 1) {
                     System.out.println("Можно вносить только числа от 1 до 9");
-                    numberOfCell = inputNumberOfCell.nextInt();
-                    if (numberOfCell > 9 || numberOfCell < 1) {
-                        System.out.println("Можно вносить только числа от 1 до 9");
-                        numberOfCell = inputNumberOfCell.nextInt();
-                        if (numberOfCell > 9 || numberOfCell < 1) {
-                            System.out.println("Прочитайте правила игры и возвращайтесь снова. Победил игрок Х");
-                            return;
-                        }
+                    countWrongInput = countWrongInput + 1;
+                    System.out.println("Неверных попыток ввода данных " + countWrongInput);
+                    if (countWrongInput == 3) {
+                        System.out.println("Вы превысили лимит попыток ввода, победил игрок 0");
+                        return;
                     }
-                }
-                break;
-            }
-            for (int h = 0; h < 3 ; h++) {
+                    numberOfCell = inputNumberOfCell.nextInt();
+                } else
                 if (field.get(numberOfCell - 1).equals("0 ") || field.get(numberOfCell - 1).equals("x ")) {
                     System.out.println("Эта ячейка уже занята, выберите другую ячейку");
-                    numberOfCell = inputNumberOfCell.nextInt();
-                    if (field.get(numberOfCell - 1).equals("0 ") || field.get(numberOfCell - 1).equals("x ")) {
-                        System.out.println("Эта ячейка уже занята, выберите другую ячейку");
-                        numberOfCell = inputNumberOfCell.nextInt();
-                        if (field.get(numberOfCell - 1).equals("0 ") || field.get(numberOfCell - 1).equals("x ")) {
-                            System.out.println("Прочитайте правила игры и возвращайтесь снова. Победил игрок Х");
-                            return;
-                        }
+                    countWrongInput = countWrongInput + 1;
+                    System.out.println("Неверных попыток ввода данных " + countWrongInput);
+                    if (countWrongInput == 3) {
+                        System.out.println("Вы превысили лимит попыток ввода, победил игрок 0");
+                        return;
                     }
-                }
-                break;
+                    numberOfCell = inputNumberOfCell.nextInt();
+                } else
+                    break;
             }
-                field.set((numberOfCell - 1),"0 ");
+            field.set((numberOfCell - 1),"0 ");
             printField(field);
             if((field.get(0).equals("0 ") && field.get(1).equals("0 ") && field.get(2).equals("0 "))
                     || (field.get(3).equals("0 ") && field.get(4).equals("0 ") && field.get(5).equals("0 "))
